@@ -1,0 +1,56 @@
+@post
+@body: {email: dummyemail@example.com, password: dummypassword}
+/api/authenticate
+@res: {JWT token}
+
+@post
+/api/follow/{id}
+@header: {Authorization: Bearer JWT_token}
+@res: 200 OK
+
+@post
+/api/unfollow/{id}
+@header: {Authorization: Bearer JWT_token}
+@res: 200 OK
+
+@get
+/api/user
+@header: {Authorization: Bearer JWT_token}
+@res: {User Name: string, Followers: integer, Followings: integer}
+
+@post
+@body: {title: string, description: string}
+/api/posts/
+@header: {Authorization: Bearer JWT_token}
+@res: {Post-ID: ObjectId, Title: string, Description: string, Created Time: datetime}
+
+@delete
+/api/posts/{id}
+@header: {Authorization: Bearer JWT_token}
+@res: 200 OK
+
+@post
+/api/like/{id}
+@header: {Authorization: Bearer JWT_token}
+@res: 200 OK
+
+@post
+/api/unlike/{id}
+@header: {Authorization: Bearer JWT_token}
+@res: 200 OK
+
+@post
+@body: {comment: string}
+/api/comment/{id}
+@header: {Authorization: Bearer JWT_token}
+@res: {Comment-ID: integer}
+
+@get
+/api/posts/{id}
+@header: {Authorization: Bearer JWT_token}
+@res: {Post-ID: integer, Title: string, Description: string, Created Time: datetime, Likes: integer, Comments: array of comments}
+
+@get
+/api/all_posts
+@header: {Authorization: Bearer JWT_token}
+@res: [{id: integer, title: string, desc: string, created_at: datetime, comments: array of comments, likes: integer}, ...]
